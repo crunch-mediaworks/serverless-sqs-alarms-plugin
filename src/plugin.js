@@ -11,6 +11,8 @@ class Alarm {
     this.thresholds = alarm.thresholds
     this.name = alarm.name
     this.treatMissingData = alarm.treatMissingData
+    this.statistic = alarm.statistic ? alarm.statistic : 'Sum'
+    this.comparisonOperator = alarm.comparisonOperator ? alarm.comparisonOperator : 'GreaterThanOrEqualToThreshold'
   }
 
   formatAlarmName (value) {
@@ -66,7 +68,7 @@ class Alarm {
               Period: properties.period || 60,
               EvaluationPeriods: properties.evaluationPeriods || 1,
               Threshold: properties.value,
-              ComparisonOperator: 'GreaterThanOrEqualToThreshold',
+              ComparisonOperator: this.comparisonOperator,
               AlarmActions: [
                 { 'Fn::Join': [ '', [ 'arn:aws:sns:' + this.region + ':', { 'Ref': 'AWS::AccountId' }, ':' + this.topic ] ] }
               ],
