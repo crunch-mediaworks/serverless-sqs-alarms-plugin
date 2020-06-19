@@ -64,7 +64,7 @@ class Alarm {
                   Value: this.queue
                 }
               ],
-              Statistic: 'Sum',
+              Statistic: this.statistic,
               Period: properties.period || 60,
               EvaluationPeriods: properties.evaluationPeriods || 1,
               Threshold: properties.value,
